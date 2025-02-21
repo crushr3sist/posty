@@ -1,0 +1,22 @@
+version: "3.8"
+
+volumes:
+  data:
+
+networks:
+  my-network:
+    driver: bridge
+
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=ronny
+    ports:
+      - "5432:5432"
+    volumes:
+      - data:/var/lib/postgresql
+    networks:
+      - my-network
+    restart: always

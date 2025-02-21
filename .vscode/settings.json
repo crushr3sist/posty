@@ -1,0 +1,11 @@
+{
+  "workbench.list.horizontalScrolling": true,
+  "problems.showCurrentInStatus": true,
+  "editor.wordWrap": "on",
+  "problems.decorations.enabled": true,
+  "editor.hover.enabled": true,
+  "editor.hover.above": false,
+  "editor.guides.bracketPairs": true,
+  "editor.formatOnSave": true,
+  "editor.hover.sticky": true
+}
