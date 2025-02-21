@@ -6,7 +6,7 @@ use uuid::Uuid;
 #[sea_orm(table_name = "users")]
 pub struct Model {
     #[sea_orm(primary_key)]
-    pub id: Uuid,
+    pub id: i32,
     pub username: String,
     pub password: String,
 }

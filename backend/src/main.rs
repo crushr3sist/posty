@@ -1,10 +1,28 @@
-mod services;
-use std::net::SocketAddr;
+use dotenvy::dotenv;
+use posty::*;
+use sea_orm_migration::MigratorTrait;
+use std::{env, net::SocketAddr};
 use tokio::signal;
 
 #[tokio::main]
 async fn main() {
-    let app = services::build_endpoints();
+    dotenv().ok();
+
+    env::set_var(
+        "DATABASE_URL",
+        "postgresql://postgres:ronny@localhost:5432/postgres",
+    );
+
+    // Run migrations
+    let db_conn = db::establish_connection()
+        .await
+        .expect("Failed to connect to the database");
+
+    migration::Migrator::up(&db_conn, None)
+        .await
+        .expect("Failed to run migrations");
+
+    let app = services::build_endpoints().await;
 
     let addr = SocketAddr::from(([127, 0, 0, 1], 8000));
     println!("listening on http://{}", addr);
